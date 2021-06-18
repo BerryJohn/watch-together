@@ -1,0 +1,10 @@
+@import '../styleHelpers/defaultReset.scss';
+
+
+
+.App{
+    @include defaultReset;
+    display:flex;
+    height: 100vh;
+    background-color: rgb(63, 63, 63)
+}
