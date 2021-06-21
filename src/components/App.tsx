@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC } from 'react';
 import './App.scss';
 import {
     BrowserRouter as Router,

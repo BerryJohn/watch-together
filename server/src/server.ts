@@ -15,7 +15,7 @@ socket.on('connection', (ws) => {
 const broadcast = (data: string): void => {
     socket.clients.forEach(client => {
       client.send(data);
-    });	
+    });
 };
 
 server.listen(8080);
