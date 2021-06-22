@@ -15,8 +15,10 @@ interface IVideo {
 export const Video: FC<IVideo> = (props) => {
     const videoRef = useRef<ReactPlayer>(null);
     const [playing, setPlaying] = useState(false);
+    const [addTime, setAddTime] = useState(0);  // ADD/REMOVE TIME TO CORRECT TIME WITH OTHER GUYS
 
     const playingHandler = () => setPlaying(!playing);
+    const timeHandler = (time: number) => {setAddTime(addTime + time)};
 
     props.socket.onmessage = (e) => {
         const data: IWsData = JSON.parse(e.data);
@@ -26,15 +28,16 @@ export const Video: FC<IVideo> = (props) => {
 
     const videoSeekHandler = (time: number) => {
         const currentTime: number = videoRef.current?.getCurrentTime() as number;
-        console.log(time - currentTime);
-        if( Math.abs(time - currentTime) < 2)
+        console.log((time - addTime) - currentTime);
+        if( Math.abs((time - addTime) - currentTime) < 2)
             console.log('good');
         else
             {
                 console.log('chnage time')
-                videoRef.current?.seekTo(time);
+                videoRef.current?.seekTo(time + addTime);
             }
-    }
+    };
+    
 
     return(
         <>
@@ -45,7 +48,7 @@ export const Video: FC<IVideo> = (props) => {
                 ref={videoRef}
                 
             />
-            <VideoControls playing={playing} playingHandler={playingHandler}/>
+            <VideoControls playing={playing} playingHandler={playingHandler} timeHandler={timeHandler}/>
         </> 
     );
 }
