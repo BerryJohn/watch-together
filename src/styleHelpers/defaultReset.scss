@@ -4,3 +4,16 @@
     margin:0px;
     box-sizing: border-box;
 }
+
+@mixin buttonReset{
+    border:0px;
+    outline:none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+@mixin flexCenter{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}

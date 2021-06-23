@@ -1,5 +1,6 @@
 import React, { FC, useState, useRef } from 'react';
 import ReactPlayer from 'react-player'
+import './Video.scss';
 import video from '../../../video/test.mp4';
 import VideoControls from './VideoControls';
 
@@ -16,10 +17,17 @@ export const Video: FC<IVideo> = (props) => {
     const videoRef = useRef<ReactPlayer>(null);
     const [playing, setPlaying] = useState(false);
     const [addTime, setAddTime] = useState(0);  // ADD/REMOVE TIME TO CORRECT TIME WITH OTHER GUYS
-
+    const [volume, setVolume] = useState(0.2);  
+    const [time, setTime] = useState('');
     const playingHandler = () => setPlaying(!playing);
     const timeHandler = (time: number) => {setAddTime(addTime + time)};
-
+    const volumeHandler = (volume: number) => {setVolume(volume / 100)};
+    const timeBarHandler = () => {
+        let currentTime = new Date(Math.ceil(videoRef.current?.getCurrentTime() || 0) * 1000).toISOString().substr(11, 8);
+        let fullTime = new Date(Math.ceil(videoRef.current?.getDuration() || 0) * 1000).toISOString().substr(11, 8);
+        setTime(`${currentTime}/${fullTime}`);
+    };
+    
     props.socket.onmessage = (e) => {
         const data: IWsData = JSON.parse(e.data);
         videoSeekHandler(data.seconds);
@@ -37,18 +45,31 @@ export const Video: FC<IVideo> = (props) => {
                 videoRef.current?.seekTo(time + addTime);
             }
     };
-    
 
     return(
-        <>
-            <ReactPlayer 
-                playing={playing}
-                url={video} 
-                controls 
-                ref={videoRef}
-                
-            />
-            <VideoControls playing={playing} playingHandler={playingHandler} timeHandler={timeHandler}/>
+        <>  
+            <div className='player'>
+
+                <ReactPlayer
+                    width='100%'
+                    height='100%'
+                    playing={playing}
+                    url={video}
+                    // url='https://www.youtube.com/watch?v=L6PImzMKaKY' 
+                    // controls 
+                    ref={videoRef}
+                    volume={volume}
+                    progressInterval={500}
+                    onProgress={timeBarHandler}
+                />
+                <VideoControls
+                    playing={playing} 
+                    playingHandler={playingHandler}
+                    volumeHandler={volumeHandler}
+                    timeHandler={timeHandler}
+                    time={time}
+                />
+            </div>
         </> 
     );
 }

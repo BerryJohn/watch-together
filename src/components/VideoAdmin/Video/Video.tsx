@@ -31,7 +31,9 @@ export const Video: FC<IVideo> = (props) => {
             <ReactPlayer 
                 playing={playing}
                 url={video} 
+                // url='https://www.youtube.com/watch?v=L6PImzMKaKY' 
                 controls 
+                progressInterval={500}
                 onProgress={progressHandler}
             />
             <VideoControls playing={playing} playingHandler={playingHandler}/>

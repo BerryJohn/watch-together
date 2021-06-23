@@ -1,0 +1,11 @@
+@import '../../../styleHelpers/defaultReset.scss';
+
+.player{
+    @include defaultReset;
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}

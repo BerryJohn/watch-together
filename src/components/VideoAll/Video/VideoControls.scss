@@ -1,0 +1,91 @@
+@import '../../../styleHelpers/defaultReset.scss';
+
+$theme: rgb(165, 27, 108);
+
+.controlPanel{
+    @include defaultReset;
+    position: absolute;
+    bottom:0px;
+    height:50px;
+    width:100%;
+    display:flex;
+    align-items: center;
+    color:white;
+}
+
+.playButton{
+    @include buttonReset;
+    @include flexCenter;
+    height:40px;
+    width:40px;
+    transition:.2s;
+    color:white;
+    &:hover{
+        color: $theme;
+    }
+    img{
+        width:20px;
+        height:20px;
+    }
+}
+
+.timeButton{
+    @include buttonReset;
+    @include flexCenter;
+    height:40px;
+    width:40px;
+    color:white;
+    &:hover{
+        color: $theme;
+    }
+}
+
+@mixin thumb{
+    width:12px;
+    height:12px;
+    border-radius:10px;
+    background-color: $theme;
+}
+
+.volumeRange{
+    transform: translateX(-160px);
+    height:2px;
+    width:80px;
+    transition: .2s;
+    outline: none;
+    appearance: none;
+    background-color: rgb(255, 228, 245);
+    border-radius:2px;
+    &::-webkit-slider-thumb{
+        -webkit-appearance: none;
+        @include thumb;
+    }
+    &::-moz-range-thumb{
+        @include thumb;
+    }
+    &::-ms-thumb{
+        @include thumb;
+    }
+}
+
+.volumeButton{
+    display:flex;
+    align-items: center;
+    overflow: hidden;
+    width:20px;
+    padding:10px 5px;
+    transition: .2s;
+    &:hover{
+        color:$theme;
+        width:150px;
+    }
+    &:hover .volumeRange{
+        transform: translateX(0px);
+    }
+}
+
+.test{
+    border: 1px solid red;
+}
+
+
