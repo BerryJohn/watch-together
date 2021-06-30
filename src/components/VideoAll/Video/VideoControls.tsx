@@ -9,17 +9,19 @@ interface IVideoControls {
     volumeHandler(volume: number): void;
     playing: boolean;
     time:string;
+    percentTime:number;
+    percentLoadedTime:number;
 }
 
 export const VideoControls: FC<IVideoControls> = (props) => {
-    const [time, setTime] = useState(0);
+    const [controlTime, setTime] = useState(0);
     const plusHandler = () => {
         props.timeHandler(0.5);
-        setTime(time + 0.5);
+        setTime(controlTime + 0.5);
     };
     const minusHandler = () => {
         props.timeHandler(-0.5);
-        setTime(time - 0.5);
+        setTime(controlTime - 0.5);
     };
 
     return(
@@ -27,16 +29,20 @@ export const VideoControls: FC<IVideoControls> = (props) => {
             <button className='playButton' onClick={props.playingHandler}>
                 {props.playing ? (<FontAwesomeIcon icon={faPause}/>) : (<FontAwesomeIcon icon={faPlay}/>)}
             </button>
-            <button className='timeButton' onClick={plusHandler}>
-                <FontAwesomeIcon icon={faPlus}/>
+            {/* <button className='timeButton' onClick={plusHandler}>
+                 <FontAwesomeIcon icon={faPlus}/>
             </button>
-            {`${time}`} 
+            {`${controlTime}`} 
             <button className='timeButton' onClick={minusHandler}>
                 <FontAwesomeIcon icon={faMinus}/>
-            </button>
+            </button> */}
             <div className='volumeButton'>
                 <FontAwesomeIcon icon={faVolumeUp}/>
                 <input className='volumeRange' type="range" min={0} max={100} onChange={(e) => props.volumeHandler(parseInt(e.target.value))}></input>
+            </div>
+            <div className='timeBar'>
+                <div className='loadedBar' style={{transform:`translateX(${ -100 + props.percentLoadedTime}%)`}}/>
+                <div className='currentBar' style={{transform:`translateX(${ -100 + props.percentTime}%)`}}/>
             </div>
             {(props.time)}
         </div>
