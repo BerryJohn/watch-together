@@ -2,6 +2,36 @@
 
 $theme: rgb(165, 27, 108);
 
+.videoControls{
+    display:flex;
+    width:100%;
+    height:100%;
+    position: absolute;
+}
+
+.videoHover{
+    @include flexCenter;
+    width:100%;
+    height:100%;
+    color:white;
+    cursor: pointer;
+    font-size: 3vw;
+    transition:.1s;
+    &:hover{
+        color:$theme;
+    }
+}
+
+.iconVanish{
+    opacity: 0;
+    transition: .2s;
+}
+
+.iconShow{
+    opacity: 1;
+    transition: .2s;
+}
+
 .controlPanel{
     @include defaultReset;
     position: absolute;
@@ -12,7 +42,12 @@ $theme: rgb(165, 27, 108);
     align-items: center;
     color:white;
     padding:0px 20px;
-    // font-size: 25px;
+    transition: .2s;
+}
+
+.controlPanelHidden{
+    opacity: 0;
+    transition: .2s;
 }
 
 .playButton{
@@ -108,6 +143,7 @@ $theme: rgb(165, 27, 108);
     background-color: rgba(255, 255, 255, 0.5);
     z-index: 10;
     position: absolute;
+    transition:1s;
 }
 .currentBar{
     width:100%;
@@ -115,4 +151,5 @@ $theme: rgb(165, 27, 108);
     background-color: $theme;
     z-index:999;
     position: absolute;
+    transition:1s;
 }

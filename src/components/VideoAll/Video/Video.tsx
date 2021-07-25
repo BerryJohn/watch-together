@@ -75,13 +75,14 @@ export const Video: FC<IVideo> = (props) => {
                     width='100%'
                     height='100%'
                     playing={playing}
-                    // url={video}
-                    url='https://www.youtube.com/watch?v=L6PImzMKaKY' 
+                    url={video}
+                    // url='https://www.youtube.com/watch?v=L6PImzMKaKY' 
                     // controls 
                     ref={videoRef}
                     volume={volume}
                     progressInterval={500}
                     onProgress={onProgressVideoHandler}
+                    
                 />
                 <VideoControls
                     playing={playing} 
