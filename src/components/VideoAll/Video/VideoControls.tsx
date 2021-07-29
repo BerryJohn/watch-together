@@ -30,13 +30,17 @@ export const VideoControls: FC<IVideoControls> = (props) => {
 
     return(
         <div className='videoControls' onMouseEnter={toggleVideoHoverEnter} onMouseLeave={toggleVideoHoverLeave}>
+            
             <div className='videoHover' onClick={props.playingHandler}>
                 {(<FontAwesomeIcon icon={faPlay} className={props.playing ? 'iconVanish' : 'iconShow'}/>)}
             </div>
+            
             <div className={videoHovered ? 'controlPanel' : 'controlPanel controlPanelHidden'}>
+
                 <button className='playButton' onClick={props.playingHandler}>
                     {props.playing ? (<FontAwesomeIcon icon={faPause}/>) : (<FontAwesomeIcon icon={faPlay}/>)}
                 </button>
+
                 {/* <button className='timeButton' onClick={plusHandler}>
                     <FontAwesomeIcon icon={faPlus}/>
                 </button>
@@ -44,10 +48,12 @@ export const VideoControls: FC<IVideoControls> = (props) => {
                 <button className='timeButton' onClick={minusHandler}>
                     <FontAwesomeIcon icon={faMinus}/>
                 </button> */}
+
                 <div className='volumeButton'>
                     <FontAwesomeIcon icon={faVolumeUp}/>
                     <input className='volumeRange' type="range" min={0} max={100} onChange={(e) => props.volumeHandler(parseInt(e.target.value))}></input>
                 </div>
+
                 <div className='timeBar'>
                     <div className='loadedBar' style={{transform:`translateX(${ -100 + props.percentLoadedTime}%)`}}/>
                     <div className='currentBar' style={{transform:`translateX(${ -100 + props.percentTime}%)`}}/>
@@ -55,7 +61,10 @@ export const VideoControls: FC<IVideoControls> = (props) => {
                 {(props.time)}
             </div>
             <div className={!videoHovered ? 'smallControlPanel' : 'smallControlPanel smallControlPanelHidden'}>
-
+                <div className='timeBar'>
+                    <div className='loadedBar' style={{transform:`translateX(${ -100 + props.percentLoadedTime}%)`}}/>
+                    <div className='currentBar' style={{transform:`translateX(${ -100 + props.percentTime}%)`}}/>
+                </div>
             </div>
         </div>
     );

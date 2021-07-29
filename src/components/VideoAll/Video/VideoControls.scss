@@ -47,6 +47,7 @@ $theme: rgb(165, 27, 108);
 
 .controlPanelHidden{
     opacity: 0;
+    transform: translateY(30px);
     transition: .2s;
 }
 
@@ -152,4 +153,25 @@ $theme: rgb(165, 27, 108);
     z-index:999;
     position: absolute;
     transition:1s;
+}
+
+.smallControlPanel{
+    @include defaultReset;
+    position: absolute;
+    bottom:0px;
+    width:100%;
+    display:flex;
+    align-items: center;
+    color:white;
+    transition: .2s;
+    .timeBar{
+        width:100%;
+        height:2px;
+    }
+}
+
+.smallControlPanelHidden{
+    opacity: 0;
+    transform: translateY(10px);
+    transition: .2s;
 }
